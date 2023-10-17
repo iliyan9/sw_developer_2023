@@ -28,26 +28,31 @@ namespace TeilnehmerVerwaltung_v2
 
         static void Main(string[] args)
         {
-
+            Teilnehmer teilnehmer = new Teilnehmer();
             string headerText = "Teilnehmer Verwaltung v2";
-            string name = string.Empty;
-            string vorname = string.Empty;
-            string ort = string.Empty;
-            int plz = 0;
-            DateTime geburtsdatum = DateTime.MinValue;
+
 
 
             CreateHeader(headerText, ConsoleColor.Cyan, true);
 
             Console.WriteLine("Bitte geben Sie die Teilnehmer Daten ein: ");
+            teilnehmer = GetStudentInfos();
 
-            vorname = ReadString("\tVorname:");
-            name = ReadString("\tNachname:");
-            geburtsdatum = ReadDateTime("\tGeburtsdatum: ");
-            plz = ReadInt("\tPLZ: ");
-            ort = ReadString("\tWohnort:");
-            DisplayStudentInfo(vorname, name, geburtsdatum, plz, ort);
+            DisplayStudentInfo(teilnehmer);
 
+        }
+
+        private static Teilnehmer GetStudentInfos()
+        {
+            Teilnehmer teilnehmer;
+
+            teilnehmer.Name = ReadString("\tVorname:");
+            teilnehmer.Nachname = ReadString("\tNachname:");
+            teilnehmer.Geburtsdatum = ReadDateTime("\tGeburtsdatum: ");
+            teilnehmer.Plz = ReadInt("\tPLZ: ");
+            teilnehmer.Ort = ReadString("\tWohnort:");
+
+            return teilnehmer;
         }
 
         private static int ReadInt(string inputPrompt)
@@ -63,7 +68,7 @@ namespace TeilnehmerVerwaltung_v2
 
                 try
                 {
-                    inputValue = DateTime.Parse(input);
+                    inputValue = DateTime.Parse(input "dd-MM-yyyy", CultureInfo.InvariantCulture);
                     inputIsValid = true;
                 }
                 catch
@@ -78,25 +83,23 @@ namespace TeilnehmerVerwaltung_v2
 
             }
             while (!inputIsValid);
+        }
 
-            return inputDateTime;
-        }        
-
-        private static void DisplayStudentInfo(string vorname, string name, DateTime geburtsdatum, int plz, string ort)
+        private static void DisplayStudentInfo(Teilnehmer teilnehmerToDisplay)
         {
-            Console.WriteLine();
-            Console.WriteLine($"string input = string.Empty;
-            DateTime inputDateTime = DateTime.MinValue;
-            bool inputIsValid = false;
+            Console.WriteLine("\nDie Teilnehmerdaten \n");
+
+            Console.WriteLine($"\t{studentInfo)");
             do
             {
                 Console.Write("\tGeburtsdatum (dd.mm.YYYY): ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 input = Console.ReadLine();
                 Console.ResetColor();
 
                 try
                 {
-                    inputDateTime = DateTime.ParseExact(input, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                    geburtsdatum = DateTime.ParseExact(input, "dd-MM-yyyy", CultureInfo.InvariantCulture);
                     inputIsValid = true;
                 }
                 catch
@@ -112,7 +115,7 @@ namespace TeilnehmerVerwaltung_v2
             }
             while (!inputIsValid);
 
-            return inputDateTime;($"\t{vorname}, {name}, {geburtsdatumToShortDateString}, {plz}, {ort}")
+            return inputDateTime; ($"\t{vorname}, {name}, {geburtsdatum}, {plz}, {ort}")
         }
 
         private static string ReadString(string inputPrompt)
